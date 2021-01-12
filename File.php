@@ -10,15 +10,6 @@ Class File {
 		$_SESSION['data'][$i] = $arr;
 	}
 	
-	public static function randomString() {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $randstring = '';
-        for ($i = 0; $i < 10; $i++) {
-            $randstring = $characters[rand(0, strlen($characters))];
-        }
-        return $randstring;
-	}
-	
 	public static function uploadCSV($files) {
 		$_SESSION['data'] = null;
 		$filename = $files["file"]["name"];
@@ -59,7 +50,7 @@ Class File {
                 <th>OPERATOR ID</th>
             </tr>
         </thead>";
-		foreach($_SESSION['data'] as $k=>$v) {
+		foreach($_SESSION['data'] as $k=>$) {
 			$train = $v[0];
 			$route = $v[1];
 			$run = $v[2];
