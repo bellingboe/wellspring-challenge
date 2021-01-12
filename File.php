@@ -10,6 +10,14 @@ Class File {
 		$_SESSION['data'][$i] = $arr;
 	}
 	
+	public static function heading() {
+		include "heading.php";
+	}
+	
+	public static function footing() {
+		echo "</body></html>";
+	}
+	
 	public static function uploadCSV($files) {
 		$_SESSION['data'] = null;
 		$filename = $files["file"]["name"];
@@ -40,7 +48,8 @@ Class File {
 		self::displayTable();
 	}
 	
-	protected static function displayTable() {
+	public static function displayTable() {
+		File::heading();
 		echo "<a href='index.php?reset'>[RESET]</a><br><br><table class='sortable'>\r\n";
 		echo "<thead>
             <tr>
@@ -50,7 +59,7 @@ Class File {
                 <th>OPERATOR ID</th>
             </tr>
         </thead>";
-		foreach($_SESSION['data'] as $k=>$) {
+		foreach($_SESSION['data'] as $k=>$v) {
 			$train = $v[0];
 			$route = $v[1];
 			$run = $v[2];
@@ -58,6 +67,7 @@ Class File {
 			echo "<tr><td>$train</td><td>$route</td><td>$run</td><td>$op</td></tr>\r\n";
 		}
 		echo "</tbody></table>\r\n";
+		File::footing();
 	}
 
 	
