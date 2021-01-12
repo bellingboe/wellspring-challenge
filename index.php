@@ -11,7 +11,7 @@ if (isset($_GET['reset'])) {
 	exit;
 }
 
-if ($_SESSION['data']){
+if (isset($_SESSION['data']) && !is_null($_SESSION['data'])){
 	echo "<a href='?reset'>[RESET]</a>" . File::displayTable();
 }else{
 ?>
