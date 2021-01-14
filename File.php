@@ -2,12 +2,15 @@
 
 Class File {
 	
-	public static function saveRecord($i, $train, $route, $run, $op) {
-		$arr = [0 => $train,
-				1 => $route,
-				2 => $run,
-				3 => $op];
-		$_SESSION['data'][$i] = $arr;
+	public static function saveRecord($i, $arr) {
+		foreach($_SESSION['cols'] as $k=>$v) {
+			$data[$k] = $arr[$k];
+		}
+		$_SESSION['data'][$i] = $data;
+	}
+	
+	public static function saveHeader($i, $text) {
+		$_SESSION['cols'][$i] = $text;
 	}
 	
 	public static function heading() {
@@ -30,11 +33,15 @@ Class File {
 					if ($i == 0) {
 						$_SESSION['column_headers'] = $line;
 					} else {
-						$train = $line[0];
-						$route = $line[1];
-						$run = $line[2];
-						$op = $line[3];
-						File::saveRecord($i, $train, $route, $run, $op);
+						$data = [];
+						$column_count = count($_SESSION['column_headers']);
+						for ($x=0; $x<=($column_count-1); $x++) {
+							File::saveHeader($x, $_SESSION['column_headers'][$x]);
+						}
+						foreach($_SESSION['cols'] as $k=>$v) {
+							$data[$k] = $line[$k];
+						}
+						File::saveRecord($i, $data);
 					}
 					$i++;
 				}
@@ -52,11 +59,13 @@ Class File {
 		File::heading();
 		echo "<a href='index.php?reset'>[RESET]</a><br><br><table class='sortable'>\r\n";
 		echo "<thead>
-            <tr>
-                <th>TRAIN</th>
-                <th>ROUTE NAME</th>
-                <th>RUN NAME</th>
-                <th>OPERATOR ID</th>
+            <tr>";
+			
+			foreach($_SESSION['cols'] as $k=>$v) {
+				echo "<th>".ucfirst(strtolower(str_replace("_","&nbsp;",$v)))."</th>";
+			}
+			
+                echo "
             </tr>
         </thead>";
 		foreach($_SESSION['data'] as $k=>$v) {
