@@ -3,10 +3,7 @@
 Class File {
 	
 	public static function saveRecord($i, $arr) {
-		foreach($_SESSION['cols'] as $k=>$v) {
-			$data[$k] = $arr[$k];
-		}
-		$_SESSION['data'][$i] = $data;
+		$_SESSION['data'][$i] = $arr;
 	}
 	
 	public static function saveHeader($i, $text) {
