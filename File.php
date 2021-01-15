@@ -55,16 +55,11 @@ Class File {
 	public static function displayTable() {
 		File::heading();
 		echo "<a href='index.php?reset'>[RESET]</a><br><br><table class='sortable'>\r\n";
-		echo "<thead>
-            <tr>";
-			
+		echo "<thead><tr>";
 			foreach($_SESSION['cols'] as $k=>$v) {
 				echo "<th>".ucfirst(strtolower(str_replace("_","&nbsp;",$v)))."</th>";
 			}
-			
-                echo "
-            </tr>
-        </thead>";
+                echo " </tr></thead>";
 		foreach($_SESSION['data'] as $k1=>$v1) {
 			echo "<tr>\r\n";
 			foreach($_SESSION['cols'] as $k2=>$v2) {
