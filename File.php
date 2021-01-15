@@ -65,12 +65,12 @@ Class File {
                 echo "
             </tr>
         </thead>";
-		foreach($_SESSION['data'] as $k=>$v) {
-			$train = $v[0];
-			$route = $v[1];
-			$run = $v[2];
-			$op = $v[3];
-			echo "<tr><td>$train</td><td>$route</td><td>$run</td><td>$op</td></tr>\r\n";
+		foreach($_SESSION['data'] as $k1=>$v1) {
+			echo "<tr>\r\n";
+			foreach($_SESSION['cols'] as $k2=>$v2) {
+				echo "<td>".$v1[$k2]."</td>\r\n";
+			}
+			echo "</tr>\r\n";
 		}
 		echo "</tbody></table>\r\n";
 		File::footing();
